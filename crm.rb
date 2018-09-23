@@ -50,7 +50,12 @@ class CRM
     puts "Enter Notes"
     note = gets.chomp
 
-    contact = Contact.create(first_name, last_name, email, note)
+    contact = Contact.create(
+      first_name: first_name,
+      last_name:  last_name,
+      email:      email,
+      note:       note
+    )
 
   end
 
@@ -99,13 +104,11 @@ class CRM
     puts found_contact.inspect
   end
 
-
-
-
 end
-
-# kevin = Contact.create('kevin', 'diep', 'kevind@hotmail.com', 'likes food')
-# mike = Contact.create('mike', 'fernz', 'mikefernz@hotmail.com', 'likes liverpool')
 
 my_crm = CRM.new
 my_crm.main_menu
+
+at_exit do
+  ActiveRecord::Base.connection.close
+end
